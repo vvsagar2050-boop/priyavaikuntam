@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fun Valentine Page 💖</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #ffe6ea; /* First page light pink */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    transition: background 0.5s ease;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  #mainContent {
+    position: relative;
+    z-index: 2;
+    color: #e6005c;
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .buttons {
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #yes {
+    background: #ff4d88;
+    color: white;
+    margin-right: 20px;
+  }
+
+  #no {
+    background: #cccccc;
+    position: absolute;
+  }
+
+  /* Background image div for after Yes click */
+  #bgImage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/p1.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+</style>
+</head>
+<body>
+
+<div id="mainContent">
+  No click chey siriii....click avvatledhaaa ithe yes click chey
+  <div class="buttons">
+    <button id="yes" onclick="yesClicked()">Yes 💖</button>
+    <button id="no" onmouseover="moveNo()">No 😜</button>
+  </div>
+</div>
+
+<!-- Background image div -->
+<div id="bgImage"></div>
+
+<script>
+function moveNo() {
+  const noBtn = document.getElementById("no");
+  const x = Math.random() * 300 - 150;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function yesClicked() {
+  // Show the background image
+  document.getElementById('bgImage').style.opacity = 1;
+
+  // Change only the main content text
+  document.getElementById('mainContent').innerHTML = `
+    Hloo hai siriii paapa. naaku padhu dhi oka pic kaavali.<br>
+    Neeku ivvali anipistene ivvu ledhu ante light parledhu.
+  `;
+}
+</script>
+
+</body>
+</html>
