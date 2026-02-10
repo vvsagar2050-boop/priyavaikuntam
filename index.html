@@ -2,101 +2,166 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Fun Valentine Page 💖</title>
+<title>Vijju 💖</title>
+
 <style>
   body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #ffe6ea; /* First page light pink */
+    background: #ffe6ea;
     font-family: Arial, sans-serif;
-    text-align: center;
-    transition: background 0.5s ease;
     overflow: hidden;
     margin: 0;
   }
 
   #mainContent {
     position: relative;
-    z-index: 2;
-    color: #e6005c;
+    z-index: 3;
     font-size: 22px;
     line-height: 1.5;
+    text-align: center;
+    color: #e6005c;
   }
 
+  /* BUTTON AREA */
   .buttons {
-    margin-top: 30px;
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;               /* close spacing */
+    justify-content: center;
     position: relative;
-    z-index: 2;
   }
 
   button {
-    padding: 12px 25px;
+    padding: 12px 22px;
     font-size: 18px;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
+    border: none;
+    position: relative;
+    touch-action: manipulation;
   }
 
-  #yes {
+  /* page 1 */
+  .pinkBtn {
     background: #ff4d88;
     color: white;
-    margin-right: 20px;
   }
 
-  #no {
+  .grayBtn {
     background: #cccccc;
-    position: absolute;
+    color: black;
   }
 
-  /* Background image div for after Yes click */
+  /* page 2 */
+  .whiteBtn {
+    background: black;
+    color: white;
+    border: 1px solid #333;
+  }
+
+  /* background image (page 3) */
   #bgImage {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('img/p1.jpg') no-repeat center center;
+    inset: 0;
+    background: url('img/p3.jpg') no-repeat center center;
     background-size: cover;
     filter: blur(5px);
     z-index: 1;
     opacity: 0;
     transition: opacity 1s ease;
   }
+
+  #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  /* final text */
+  .afterYesWrapper {
+    width: 100vw;
+    padding-left: 23px;
+    box-sizing: border-box;
+  }
+
+  .afterYesText {
+    color: white;
+    font-size: 22px;
+    line-height: 1.6;
+    text-align: left;
+    max-width: 540px;
+  }
 </style>
 </head>
+
 <body>
 
+<!-- PAGE 1 -->
 <div id="mainContent">
-  No click chey siriii....click avvatledhaaa ithe yes click chey
+  No click chey....click avvatledhaaa ithe....
   <div class="buttons">
-    <button id="yes" onclick="yesClicked()">Yes 💖</button>
-    <button id="no" onmouseover="moveNo()">No 😜</button>
+    <button class="pinkBtn">Yes</button>
+    <button class="grayBtn"
+      onmouseover="moveButton(this)"
+      ontouchstart="moveButton(this)">
+      No 😜
+    </button>
   </div>
 </div>
 
-<!-- Background image div -->
 <div id="bgImage"></div>
+<div id="overlay"></div>
 
 <script>
-function moveNo() {
-  const noBtn = document.getElementById("no");
-  const x = Math.random() * 300 - 150;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+function moveButton(btn) {
+  const x = Math.random() * 160 - 80;
+  const y = Math.random() * 120 - 60;
+  btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-function yesClicked() {
-  // Show the background image
-  document.getElementById('bgImage').style.opacity = 1;
-
-  // Change only the main content text
-  document.getElementById('mainContent').innerHTML = `
-    Hloo hai siriii paapa. naaku padhu dhi oka pic kaavali.<br>
-    Neeku ivvali anipistene ivvu ledhu ante light parledhu.
+/* PAGE 2 */
+function goPage2() {
+  document.getElementById("mainContent").innerHTML = `
+    Ippudu YES click chey....avvatledha ithe 😜
+    <div class="buttons">
+      <button class="whiteBtn"
+        onmouseover="moveButton(this)"
+        ontouchstart="moveButton(this)">
+        Yes
+      </button>
+      <button class="whiteBtn" onclick="goPage3()">No</button>
+    </div>
   `;
 }
+
+/* PAGE 3 */
+function goPage3() {
+  document.getElementById("bgImage").style.opacity = 1;
+  document.getElementById("overlay").style.opacity = 1;
+
+  document.getElementById("mainContent").innerHTML = `
+    <div class="afterYesWrapper">
+      <div class="afterYesText">
+        Hloo Hai Priya paaapa......<br>
+         nenu first yedipinchi tarwatha surprise iche type.<br>
+        Sorry kaavalane alaa annanu nenu yendhuku istaanu neeku surpise ani.<br>
+        alaanti udhesam am ledhu konchem yedipiddam ani cheppa<br>
+        sry..sry..sry.......ponii 3000 times sorry.....<br>
+        thank you Navvinandhuku.........
+        and elaa undhi ee surprise.......
+      </div>
+    </div>
+  `;
+}
+
+/* bind page 1 YES after load */
+document.querySelector(".pinkBtn").onclick = goPage2;
 </script>
 
 </body>
